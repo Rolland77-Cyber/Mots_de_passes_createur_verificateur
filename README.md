@@ -9,6 +9,7 @@ Présence de symboles
 Vérification dans une liste de mots de passe courants
 
 
+
 2. Gestion d’accès simple
 
 Fonctionnalités :
@@ -27,7 +28,10 @@ Langage      	Python 3
 Sécurité	    SHA-256 (hashlib)
 Stockage	    JSON simple
 
+
+
 Pyton 3 nécessaire pour l'installation.
+
 
 
 Ce projet est sous MIT License. Voir le fichier LICENSE pour plus de détails.
