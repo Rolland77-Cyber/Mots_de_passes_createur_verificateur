@@ -1,0 +1,39 @@
+Installation
+
+Prérequis :
+Python 3 installé sur votre système (vérifier avec python --version).
+Git installé si vous souhaitez cloner le dépôt (optionnel).
+Accès à un terminal ou invite de commande.
+
+
+Installation via Git :
+Ouvrir un terminal
+Cloner le dépôt à l'aide de la commande suivante :
+git clone https://github.com/<Rolland77-Cyber>/password-security-tools.git
+Aller dans le dossier du projet à l'aide de la commande suivante :
+cd password-security-tools
+
+Installation sans Git :
+Télécharger le projet au format ZIP depuis GitHub.
+Extraire le dossier dans l'emplacement de votre choix.
+Ouvrir un terminal dans le dossier extrait.
+
+
+
+Lancer les outils
+
+1. Analyse de mots de passe
+Ouvrir un terminal puis taper :
+python password_checker/password_checker.py
+Entrez un mot de passe lorsque demandé.
+Le script affichera la force du mot de passe et les critères remplis.
+
+
+2. Gestion d’accès simple
+Ouvrir un terminal puis taper :
+python access_manager/auth.py
+Choisissez 1 pour créer un compte ou 2 pour vous connecter.
+Suivez les instructions à l'écran.
+
+
+
