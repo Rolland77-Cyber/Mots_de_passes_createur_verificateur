@@ -1,0 +1,33 @@
+import re
+
+# Charger les mots de passe communs
+def load_common_passwords(file_path="common_passwords.txt"):
+    with open(file_path, "r", encoding="utf-8") as f:
+        return set(p.strip() for p in f)
+
+# Vérifier la robustesse du mot de passe
+def check_strength(pwd, common_list):
+    score = 0
+    criteria = {
+        "longueur >= 12": len(pwd) >= 12,
+        "majuscule": bool(re.search(r"[A-Z]", pwd)),
+        "minuscule": bool(re.search(r"[a-z]", pwd)),
+        "chiffre": bool(re.search(r"[0-9]", pwd)),
+        "symbole": bool(re.search(r"[^\w]", pwd)),
+        "pas dans liste commune": pwd not in common_list
+    }
+
+    for ok in criteria.values():
+        score += ok
+
+    return score, criteria
+
+if __name__ == "__main__":
+    common = load_common_passwords()
+    pwd = input("Mot de passe à analyser : ")
+
+    strength, details = check_strength(pwd, common)
+    print(f"\nScore : {strength}/6\n")
+
+    for crit, ok in details.items():
+        print(f"{crit} : {'OK' if ok else 'NON'}")
