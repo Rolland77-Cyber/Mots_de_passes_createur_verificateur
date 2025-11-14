@@ -1,0 +1,59 @@
+import json
+import os
+import hashlib
+
+DB_FILE = "users.json"
+
+# Charger la base d'utilisateurs
+def load_db():
+    if not os.path.exists(DB_FILE):
+        return {}
+    with open(DB_FILE, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+# Sauvegarder la base
+def save_db(db):
+    with open(DB_FILE, "w", encoding="utf-8") as f:
+        json.dump(db, f, indent=4, ensure_ascii=False)
+
+# Hasher le mot de passe
+def hash_pwd(pwd):
+    return hashlib.sha256(pwd.encode()).hexdigest()
+
+# Créer un utilisateur
+def create_user(username, pwd):
+    db = load_db()
+    if username in db:
+        return False, "Utilisateur déjà existant."
+    db[username] = hash_pwd(pwd)
+    save_db(db)
+    return True, "Utilisateur créé."
+
+# Vérifier l'accès
+def check_access(username, pwd):
+    db = load_db()
+    if username not in db:
+        return False, "Utilisateur inconnu."
+    if db[username] != hash_pwd(pwd):
+        return False, "Mot de passe incorrect."
+    return True, "Accès autorisé."
+
+if __name__ == "__main__":
+    print("1 = Créer un utilisateur")
+    print("2 = Se connecter")
+    choice = input("Choix : ")
+
+    if choice == "1":
+        u = input("Nom : ")
+        p = input("Mot de passe : ")
+        ok, msg = create_user(u, p)
+        print(msg)
+
+    elif choice == "2":
+        u = input("Nom : ")
+        p = input("Mot de passe : ")
+        ok, msg = check_access(u, p)
+        print(msg)
+
+    else:
+        print("Choix invalide.")
